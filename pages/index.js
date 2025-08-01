@@ -7,23 +7,25 @@ export default function Home() {
   const [vin, setVin] = useState('');
   const [plan, setPlan] = useState('monthly');
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     alert(`Subscribed: ${email}, ${make}, ${model}, VIN: ${vin}, Plan: ${plan}`);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
       <h1 className="text-4xl font-bold text-[#D35400] mb-4">Oil Subscription Service</h1>
       <p className="mb-8 text-gray-700 max-w-lg text-center">
         Get oil and filters delivered to your door on your schedule. Sign up below.
       </p>
-      <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-md space-y-4">
+      <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-xl p-6 w-full max-w-md space-y-4">
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full border border-gray-300 p-3 rounded"
+          required
         />
         <input
           type="text"
@@ -31,6 +33,7 @@ export default function Home() {
           value={make}
           onChange={(e) => setMake(e.target.value)}
           className="w-full border border-gray-300 p-3 rounded"
+          required
         />
         <input
           type="text"
@@ -38,6 +41,7 @@ export default function Home() {
           value={model}
           onChange={(e) => setModel(e.target.value)}
           className="w-full border border-gray-300 p-3 rounded"
+          required
         />
         <input
           type="text"
@@ -56,12 +60,12 @@ export default function Home() {
           <option value="biannually">Biannually</option>
         </select>
         <button
-          onClick={handleSubmit}
+          type="submit"
           className="bg-[#D35400] w-full py-3 text-white font-bold rounded hover:bg-[#c44500]"
         >
           Start Subscription
         </button>
-      </div>
-    </div>
+      </form>
+    </main>
   );
 }
